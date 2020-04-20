@@ -1,0 +1,45 @@
+type Query {
+  serverLocations: [Location!]!
+  serverList: [Server]
+}
+
+type Mutation {
+  createServer(details: Details, regionCode: String!): createResponse!
+  serverReady(id: Int!): Boolean!
+  destroyServer(id: Int!): Boolean!
+}
+
+type Subscription {
+  serverReady(id: Int!): Server!
+  serverClosed(id: Int!): Server!
+}
+
+type Location {
+  datacenterId: Int!
+  name: String!
+  country: String!
+  continent: String!
+  regionCode: String!
+}
+
+type Server {
+  id: Int!
+  name: String!
+  datacenterId: Int!
+  location: String!
+  ram: String!
+  cores: Int!
+  ip: String!
+  status: String!
+}
+
+input Details {
+  username: String!
+  uuid: String!
+}
+
+type createResponse {
+  success: Boolean!
+  location: String
+  serverId: Int
+}

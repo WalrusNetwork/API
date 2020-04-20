@@ -1,0 +1,73 @@
+type Query {
+  groups(id: Int, staff: Boolean): [Group]
+}
+
+type Mutation {
+  createGroup(input: GroupInput!): Group!
+  modifyGroup(name: String!, input: ModifyGroupInput!): Group!
+  deleteGroup(name: String!): String!
+  addUserToGroup(username: String!, groupName: String!): User!
+  removeUserFromGroup(username: String!, groupName: String!): User!
+  addGroupPerms(
+    groupName: String!
+    realm: String!
+    permissions: [String!]!
+  ): Group!
+  removeGroupPerms(
+    groupName: String!
+    realm: String!
+    permissions: [String!]!
+  ): Group!
+}
+
+input GroupInput {
+  name: String!
+  priority: Int!
+  staff: Boolean
+  tag: String
+  flair: String!
+  badge: String!
+  badgeColor: String
+  badgeTextColor: String
+  apiPermissions: [String!]
+}
+
+input ModifyGroupInput {
+  name: String
+  priority: Int
+  staff: Boolean
+  tag: String
+  flair: String
+  badge: String
+  badgeColor: String
+  badgeTextColor: String
+  apiPermissions: [String!]
+}
+
+type Group {
+  id: Int!
+  name: String!
+  priority: Int!
+  staff: Boolean!
+  tag: String!
+  flair: String!
+  badge: String
+  badgeColor: String
+  badgeTextColor: String
+  permissions(realm: String): [Permissions!]
+  apiPermissions: [String!]
+  users: [User!]
+}
+
+type User {
+  groups: [Group]!
+  flair: String!
+  tag: String!
+  permissions(realm: String): [String!]!
+  apiPermissions: [String!]!
+}
+
+type Permissions {
+  realm: String!
+  value: String!
+}

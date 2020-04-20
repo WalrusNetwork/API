@@ -1,0 +1,43 @@
+type Query {
+  blogPosts(slug: String, locale: String, page: Int, per_page: Int): [BlogPost]
+}
+
+type Mutation {
+  createBlogPost(input: CreateBlogPostInput!): BlogPost!
+  modifyBlogPost(input: ModifyBlogPostInput!): BlogPost!
+  deleteBlogPost(slug: String!): String!
+}
+
+type BlogPost {
+  slug: String!
+  user: User!
+  content: [BlogPostContent!]!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input CreateBlogPostInput {
+  username: String!
+  content: [BlogPostContentInput!]!
+  slug: String!
+}
+
+input ModifyBlogPostInput {
+  username: String
+  content: [BlogPostContentInput]
+  slug: String!
+  "If specified, changes the blog post's slug."
+  new_slug: String
+}
+
+type BlogPostContent {
+  locale: String!
+  title: String!
+  content: String!
+}
+
+input BlogPostContentInput {
+  locale: String!
+  title: String!
+  content: String!
+}

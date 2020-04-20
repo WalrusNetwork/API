@@ -1,0 +1,54 @@
+type Query {
+  currentUser: User!
+  users(username: String!): User!
+}
+
+type Mutation {
+  signup(
+    token: Int!
+    username: String!
+    email: String!
+    password: String!
+  ): User!
+  login(email: String!, password: String!): User!
+  invalidateTokens: Boolean!
+  verifyUser(token: String!, email: String!): Boolean!
+  userJoin(uuid: String!, username: String!): User!
+  userLeave(username: String!, timePlayed: Int!): User!
+  updateAresStats(username: String!, stats: AresStatsInput!): User!
+}
+
+type User {
+  uuid: String!
+  username: String!
+  online: Boolean!
+  email: String
+  joined: String!
+  timePlayed: String!
+  ares: AresStats!
+  role: String
+}
+
+type AresStats {
+  wins: Int!
+  losses: Int!
+  kills: Int!
+  deaths: Int!
+  wools: Int!
+  monuments: Int!
+  cores: Int!
+  hills: Int!
+  flags: Int!
+}
+
+input AresStatsInput {
+  wins: Int
+  losses: Int
+  kills: Int
+  deaths: Int
+  wools: Int
+  monuments: Int
+  cores: Int
+  hills: Int
+  flags: Int
+}
