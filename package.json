@@ -11,7 +11,7 @@
   "author": "Indicado",
   "dependencies": {
     "@walrusnetwork/prettier-config": "^1.0.0",
-    "apollo-server-express": "^2.9.16",
+    "apollo-server-express": "^2.14.2",
     "bcryptjs": "^2.4.3",
     "cloudflare": "^2.7.0",
     "cookie-parser": "^1.4.4",
